@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
@@ -11,51 +12,57 @@ use App\Http\Controllers\Admin\AdminArtworkController;
 use App\Http\Controllers\Admin\AdminArtistController;
 use App\Http\Controllers\Admin\UserController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
 // --- Public Routes ---
 
-// Homepage (adjust if you have a dedicated home controller/method)
-// Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [ArtworkController::class, 'index'])->name('home'); // Example: Make collection the homepage
-
-// Static Pages
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-
-// Artwork Routes
 Route::get('/collection', [ArtworkController::class, 'index'])->name('artworks.index');
-Route::get('/collection/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show'); // Use Route Model Binding
+Route::get('/collection/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show');
 Route::get('/art-of-the-day', [ArtworkController::class, 'artOfTheDay'])->name('artworks.artoftheday');
-
-// Artist Routes
 Route::get('/artists', [ArtistController::class, 'index'])->name('artists.index');
-Route::get('/artists/{artist}', [ArtistController::class, 'show'])->name('artists.show'); // Use Route Model Binding
+Route::get('/artists/{artist}', [ArtistController::class, 'show'])->name('artists.show');
 
 
-// --- Breeze Auth Routes (Added by breeze:install) ---
+// --- Default Breeze Dashboard Route ---
 Route::get('/dashboard', function () {
-    // Redirect logged-in users based on role or to a default dashboard
-    if (auth()->user()->isAdmin() || auth()->user()->isArtist()) {
-         return redirect()->route('admin.dashboard');
+    // Use Auth facade here
+    if (Auth::check()) { // <-- Changed from auth()->check()
+        $user = Auth::user(); // <-- Changed from auth()->user()
+        // Check if isAdmin() and isArtist() methods exist on the User model
+        if (method_exists($user, 'isAdmin') && $user->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        }
+        if (method_exists($user, 'isArtist') && $user->isArtist()) {
+             return redirect()->route('admin.dashboard');
+        }
     }
-     return view('dashboard'); // Default Breeze dashboard for regular users if any
+    // Default view for authenticated users without specific roles
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // --- Admin Routes ---
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    // Admin Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Admin CRUD Resources (Ensure middleware checks for appropriate role if needed)
     Route::resource('artworks', AdminArtworkController::class);
     Route::resource('artists', AdminArtistController::class);
-    Route::resource('users', UserController::class); // Add middleware for admin-only access here if needed
-
-    // Breeze Profile Routes (can be kept within admin or moved outside)
+    Route::resource('users', UserController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
-// Include the routes defined by Breeze
+// --- Authentication Routes ---
 require __DIR__.'/auth.php';

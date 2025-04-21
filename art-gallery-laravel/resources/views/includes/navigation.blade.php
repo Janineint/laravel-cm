@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                     {{-- Use request()->routeIs() to set active state --}}
+                     <!---- Use request()->routeIs() to set active state ---->
                     <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
                 </li>
                 <li class="nav-item">
@@ -19,24 +19,29 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('artists.index') ? 'active' : '' }}" href="{{ route('artists.index') }}">Artists</a>
                 </li>
+                
                 <li class="nav-item ms-lg-3">
-                    @auth {{-- Check if user is logged in --}}
-                         {{-- Determine dashboard link based on role --}}
+                <!-- Check if user is logged in -->
+                    @auth 
+                         <!-- Determine dashboard link based on role --->
                          @if(auth()->user()->isAdmin() || auth()->user()->isArtist())
                             <a class="btn btn-outline-light" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                          @else
-                             <a class="btn btn-outline-light" href="{{ route('dashboard') }}">My Dashboard</a> {{-- Default Breeze dashboard --}}
+                             <a class="btn btn-outline-light" href="{{ route('dashboard') }}">My Dashboard</a> 
                          @endif
-                    @else {{-- If user is a guest --}}
+                    @else 
+                        <!-- If user is a guest -->
                         <a class="btn btn-outline-light" href="{{ route('login') }}">Login</a>
-                         {{-- Optional: Show register link --}}
-                         {{-- @if (Route::has('register'))
+
+                         <!-- Show register link -->
+                          @if (Route::has('register'))
                              <a class="btn btn-outline-primary ms-2" href="{{ route('register') }}">Register</a>
-                         @endif --}}
+                         @endif 
                     @endauth
                 </li>
+
                 @auth
-                 {{-- Add logout button if needed directly in public nav --}}
+                 <!-- Add logout button if needed directly in public nav -->
                  <li class="nav-item ms-lg-3">
                      <form method="POST" action="{{ route('logout') }}">
                          @csrf
@@ -44,6 +49,7 @@
                      </form>
                  </li>
                 @endauth
+                
             </ul>
         </div>
     </div>
