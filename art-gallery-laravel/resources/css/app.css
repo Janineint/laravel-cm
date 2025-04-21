@@ -276,3 +276,12 @@
         padding-top: 75%; /* More square on mobile */
     }
 }
+.about-page { max-width: 1200px; }
+    .bg-purple { background-color: #6f42c1 !important; } /* Use !important if needed to override Bootstrap */
+    .bg-teal { background-color: #20c997 !important; }
+    .bg-indigo { background-color: #6610f2 !important; }
+    .bg-orange { background-color: #fd7e14 !important; }
+    .bg-laravel { background-color: #ff2d20 !important; } /* Style for added Laravel badge */
+    .card { border: none; border-radius: 10px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+    pre { white-space: pre-wrap; word-break: break-all; } /* Ensure pre content wraps */

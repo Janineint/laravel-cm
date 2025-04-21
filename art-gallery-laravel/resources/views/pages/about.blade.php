@@ -1,10 +1,9 @@
-@extends('layouts.app') {{-- Use the main public layout --}}
+@extends('layouts.app') 
 
-@section('title', 'About Art Explorer CMS') {{-- Set the page title --}}
+@section('title', 'About Art Explorer CMS') 
 
 @section('content')
-{{-- Content adapted from php-cm-janines/pages/about.php --}}
-<div class="container py-5 mt-5 about-page content-section"> {{-- Added mt-5 and content-section class --}}
+<div class="container py-5 mt-5 about-page content-section"> 
     <div class="text-center mb-5">
         <h1 class="display-4 fw-bold text-primary">Art Explorer CMS</h1>
         <p class="lead">A PHP-based Content Management System inspired by the National Gallery of Art Open Access Dataset</p>
@@ -225,20 +224,5 @@ vite.config.js          - Asset bundling config</code></pre>
         </div>
     </div>
 </div>
-
-{{-- Add the specific styles for this page if needed, or move to app.css --}}
-@push('styles') {{-- Use @push for page-specific additions --}}
-<style>
-    .about-page { max-width: 1200px; }
-    .bg-purple { background-color: #6f42c1 !important; } /* Use !important if needed to override Bootstrap */
-    .bg-teal { background-color: #20c997 !important; }
-    .bg-indigo { background-color: #6610f2 !important; }
-    .bg-orange { background-color: #fd7e14 !important; }
-    .bg-laravel { background-color: #ff2d20 !important; } /* Style for added Laravel badge */
-    .card { border: none; border-radius: 10px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
-    pre { white-space: pre-wrap; word-break: break-all; } /* Ensure pre content wraps */
-</style>
-@endpush
 
 @endsection

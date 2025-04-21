@@ -11,7 +11,7 @@
                      {{-- Use route() helper for links --}}
                     <li class="mb-2"><a href="{{ route('home') }}" class="text-white-50">Home</a></li>
                     <li class="mb-2"><a href="{{ route('artworks.index') }}" class="text-white-50">Gallery</a></li>
-                    <li class="mb-2"><a href="{{ route('artworks.index') }}" class="text-white-50">Collections</a></li> {{-- Link to same as gallery --}}
+                    <li class="mb-2"><a href="{{ route('artworks.index') }}" class="text-white-50">Collections</a></li> 
                     <li class="mb-2"><a href="{{ route('artists.index') }}" class="text-white-50">Artists</a></li>
                 </ul>
             </div>
@@ -27,9 +27,9 @@
             <div class="col-lg-4">
                 <h5 class="text-white mb-4">Newsletter</h5>
                 <p class="text-white-50">Subscribe to get updates on new artworks and features.</p>
-                {{-- Add proper form handling (route, CSRF) if implementing newsletter --}}
+                <!---- Add proper form handling (route, CSRF) if implementing newsletter ---->
                 <form class="mt-3" action="#" method="POST">
-                     @csrf {{-- Add CSRF token --}}
+                     @csrf <!-- Add CRSF token -->
                     <div class="input-group">
                         <input type="email" class="form-control" name="email" placeholder="Your email" required>
                         <button class="btn btn-light" type="submit">Subscribe</button>
@@ -40,7 +40,8 @@
         <hr class="my-4 bg-secondary">
         <div class="row">
             <div class="col-md-6 text-center text-md-start">
-                <p class="small mb-0">&copy; {{ date('Y') }} Art Explorer CMS. All rights reserved.</p> {{-- Dynamic year --}}
+                <p class="small mb-0">&copy; {{ date('Y') }} Art Explorer CMS. All rights reserved.</p> 
+                
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <ul class="list-inline mb-0">

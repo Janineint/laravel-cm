@@ -12,31 +12,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <style>
-             /* Paste relevant styles from php-cm-janines/admin/styles.css or admin/includes/styles.css here */
-             /* Or include a separate admin CSS file via Vite/Mix */
-             body { background-color: #f8f9fa; }
-             .admin-content { max-width: 1200px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-             table { width: 100%; border: 1px solid #ccc; border-spacing: 0; border-collapse: collapse; margin-bottom: 1rem; }
-             td img, th img { margin: 0; padding: 0; vertical-align: middle; }
-             td, th { border: 1px solid #ccc; padding: 10px; vertical-align: middle; }
-             th { white-space: nowrap; background-color: #e9ecef; }
-             label { display: block; margin-bottom: 5px; font-weight: 500; }
-             input[type=text], input[type=email], input[type=password], input[type=url], input[type=date], textarea, select {
-                 display: block; width: 100%; padding: .375rem .75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; appearance: none; border-radius: .25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin-bottom: 1rem;
-             }
-             input[type=submit], .btn { display: inline-block; font-weight: 400; line-height: 1.5; color: #fff; text-align: center; text-decoration: none; vertical-align: middle; cursor: pointer; user-select: none; background-color: #0d6efd; border: 1px solid #0d6efd; padding: .375rem .75rem; font-size: 1rem; border-radius: .25rem; transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
-             .btn-primary { background-color: #0d6efd; border-color: #0d6efd; }
-             .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
-             .btn-danger { background-color: #dc3545; border-color: #dc3545; }
-             .alert { padding: 1rem; margin-bottom: 1rem; border: 1px solid transparent; border-radius: .25rem; }
-             .alert-success { color: #0f5132; background-color: #d1e7dd; border-color: #badbcc; }
-             .alert-danger { color: #842029; background-color: #f8d7da; border-color: #f5c2c7; }
-             .text-end { text-align: right; }
-        </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
