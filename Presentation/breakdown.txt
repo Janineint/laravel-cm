@@ -1,0 +1,240 @@
+🏠 / (Homepage)
+1. Seeders:
+
+    File(s): database/seeders/HomePageSeeder.php (if relevant data is seeded)
+
+    Presenter: Member 1 (who works with seeders)
+
+    What to explain:
+
+        If any initial data (e.g., homepage content, featured artists) is seeded in the database.
+
+        Example: HomePageSeeder.php could add initial content for the homepage, such as featured artworks or text snippets.
+
+2. Views:
+
+    File(s): resources/views/home.blade.php
+
+    Presenter: Member 1 (Frontend/UI-focused member)
+
+    What to explain:
+
+        Blade structure, includes like @extends and @section.
+
+        Displaying data like featured artists, artworks, etc., with @foreach.
+
+        Use of custom assets like app-*.js and app-*.css for page interactivity.
+
+3. Controllers:
+
+    File(s): app/Http/Controllers/HomeController.php
+
+    Presenter: Member 1 (Controller-focused member)
+
+    What to explain:
+
+        Logic to return the homepage view and pass data from the controller to the view.
+
+        Any database queries (e.g., fetching featured artworks or categories).
+
+4. Models:
+
+    File(s): app/Models/Artwork.php, app/Models/Category.php (if applicable)
+
+    Presenter: Member 1 (who handles DB models)
+
+    What to explain:
+
+        Model relationships if applicable (e.g., Artwork model with Category model).
+
+        Basic Eloquent queries in the controller like Artwork::featured(), etc.
+
+🧑‍🎨 /artists
+1. Seeders:
+
+    File(s): database/seeders/ArtistSeeder.php
+
+    Presenter: Member 2 (who works with seeders)
+
+    What to explain:
+
+        Adding sample artist data to the database.
+
+        Example: Artist names, bios, image paths.
+
+2. Views:
+
+    File(s): resources/views/artists.blade.php
+
+    Presenter: Member 2 (Frontend/UI-focused member)
+
+    What to explain:
+
+        Displaying a list of artists with their bios, artworks, and links.
+
+        Using Blade syntax to loop through artist data: @foreach($artists as $artist).
+
+3. Controllers:
+
+    File(s): app/Http/Controllers/ArtistController.php
+
+    Presenter: Member 2 (Controller-focused member)
+
+    What to explain:
+
+        Logic for fetching artist data and passing it to the view.
+
+        Example: Artist::all() to fetch all artists or Artist::find() for a specific artist.
+
+4. Models:
+
+    File(s): app/Models/Artist.php
+
+    Presenter: Member 2 (who handles DB models)
+
+    What to explain:
+
+        Artist model, how it interacts with the database.
+
+        Relationships with other models (e.g., Artist has many Artworks).
+
+📜 /about
+1. Seeders:
+
+    File(s): database/seeders/AboutPageSeeder.php (optional)
+
+    Presenter: Member 3 (who works with seeders)
+
+    What to explain:
+
+        If there's any static content or seed data like team names, descriptions, or history for the about page.
+
+2. Views:
+
+    File(s): resources/views/about.blade.php
+
+    Presenter: Member 3 (Frontend/UI-focused member)
+
+    What to explain:
+
+        Static content displayed for the "About" page (team, project info).
+
+        Blade syntax if there is any dynamic data used.
+
+3. Controllers:
+
+    File(s): app/Http/Controllers/AboutController.php (optional, if needed)
+
+    Presenter: Member 3 (Controller-focused member)
+
+    What to explain:
+
+        If you have dynamic data (team members, project history), this controller fetches it.
+
+        If it’s static, no controller needed (simply use Route::view('/about', 'about')).
+
+4. Models:
+
+    File(s): Not usually required for static content
+
+    Presenter: Member 3 (if applicable)
+
+    What to explain:
+
+        Models for any dynamic content (e.g., about-related content pulled from the database).
+
+🖼️ /art-of-the-day
+1. Seeders:
+
+    File(s): database/seeders/ArtOfTheDaySeeder.php
+
+    Presenter: Member 4 (who works with seeders)
+
+    What to explain:
+
+        Example: Seeder for the featured artwork of the day, which can be changed daily.
+
+2. Views:
+
+    File(s): resources/views/art-of-the-day.blade.php
+
+    Presenter: Member 4 (Frontend/UI-focused member)
+
+    What to explain:
+
+        Displaying a single artwork on the page with the title, description, etc.
+
+        Blade syntax for displaying dynamic data like the featured artwork of the day.
+
+3. Controllers:
+
+    File(s): app/Http/Controllers/ArtOfTheDayController.php
+
+    Presenter: Member 4 (Controller-focused member)
+
+    What to explain:
+
+        Logic for selecting and displaying the "art of the day" from the database.
+
+        Could involve selecting a random artwork or artwork based on the date.
+
+4. Models:
+
+    File(s): app/Models/Artwork.php
+
+    Presenter: Member 4 (who handles DB models)
+
+    What to explain:
+
+        The Artwork model, possibly with a method like Artwork::featuredToday() or Artwork::getDailyArt().
+
+        Relationships to other models if needed.
+
+🖼️ /collection
+1. Seeders:
+
+    File(s): database/seeders/CollectionSeeder.php
+
+    Presenter: Member 5 (who works with seeders)
+
+    What to explain:
+
+        Seeder for artworks collection, populating the gallery with sample data.
+
+2. Views:
+
+    File(s): resources/views/collection.blade.php
+
+    Presenter: Member 5 (Frontend/UI-focused member)
+
+    What to explain:
+
+        How artworks are displayed in a gallery/grid view with pagination or filtering options.
+
+        Blade syntax and integration with the collection's data.
+
+3. Controllers:
+
+    File(s): app/Http/Controllers/CollectionController.php
+
+    Presenter: Member 5 (Controller-focused member)
+
+    What to explain:
+
+        Logic for fetching all artworks and passing them to the collection view.
+
+        Any filtering or sorting logic applied to the collection.
+
+4. Models:
+
+    File(s): app/Models/Artwork.php
+
+    Presenter: Member 5 (who handles DB models)
+
+    What to explain:
+
+        The Artwork model, with the relationships and database queries needed to get the full collection.
+
+        Use of pagination or custom queries like Artwork::where('category', 'painting')->get().
+
+

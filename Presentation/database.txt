@@ -1,0 +1,61 @@
+
+Here's a presentation outline with key points about the database relationships for Artists, Users, and Artworks:
+1. Artist ↔ Artwork (One-to-Many)
+
+    One artist can create many artworks.
+
+    Each artwork is created by only one artist.
+
+    This relationship allows us to track which artist created which artwork.
+
+2. User ↔ Artwork
+
+    Option 1: One-to-Many (User owns many artworks):
+
+        A user can own or interact with multiple artworks.
+
+        Each artwork is associated with a single user (e.g., user purchases, collection).
+
+    Option 2: Many-to-Many (Multiple users can interact with multiple artworks):
+
+        Users can have multiple artworks (e.g., liking or purchasing multiple pieces).
+
+        Each artwork can be interacted with by many users.
+
+        This allows for complex interactions (e.g., likes, purchases, shared collections).
+
+3. Artist ↔ User (Optional, if Users Can Be Artists)
+
+    One-to-One or One-to-Many:
+
+        If a user can also be an artist, there can be a one-to-one relationship where each user who is an artist has a unique artist profile.
+
+        Alternatively, a user might create many artworks, forming a one-to-many relationship.
+
+4. Database Relationship Types Summary
+
+    One-to-Many (Artist ↔ Artwork): One artist can create multiple artworks.
+
+    One-to-Many or Many-to-Many (User ↔ Artwork): Users can either own many artworks (One-to-Many) or interact with many artworks (Many-to-Many).
+
+    One-to-One or One-to-Many (Artist ↔ User): If users are also artists, each user can have one artist profile or many artworks created as an artist.
+
+5. Why These Relationships Matter
+
+    They provide a structured way to link artists to artworks and users to artworks, enabling efficient querying and management of data.
+
+    Allow for flexible interaction patterns between users and artworks, depending on whether users simply interact with or own artworks.
+
+    These relationships help create a scalable and normalized database structure, ensuring consistency and reducing redundancy.
+
+6. Potential Use Cases
+
+    Artists creating and managing their artwork.
+
+    Users browsing or purchasing artworks.
+
+    Admin management of artists and artworks within the system.
+
+These points cover the core relationships and how they are structured within a database for the given entities.
+
+

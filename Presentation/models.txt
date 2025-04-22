@@ -1,0 +1,185 @@
+
+ Model Walkthrough: Artwork.php
+🧠 What is a Model in Laravel?
+
+    “So in Laravel, a model represents a table in the database and connects it with our code. This file here — Artwork.php — is our model for the artworks table.
+    It’s what we use in the backend to interact with all the artwork data — like adding new artworks, retrieving them, or linking them to artists.”
+
+🧰 Using Laravel's Built-in Features
+
+    “We’re using the HasFactory trait here, which lets us generate dummy artwork data using factories. This was super helpful when we seeded the database with 30 artworks.”
+
+✅ Mass Assignment with $fillable
+
+    “We’re allowing mass assignment for some specific fields:
+
+    title
+
+    description
+
+    image_url
+
+    and artist_id
+
+    This just means that when we’re saving artwork in the database — maybe from a form — Laravel will only allow these fields to be written.
+    It’s a security feature to protect from unwanted fields being injected.”
+
+👥 Defining Relationships – artist() Method
+
+    “This part is really important.
+    We’re saying that every Artwork belongs to an Artist, using the belongsTo() method.
+    Laravel uses this to automatically let us do things like:
+
+$artwork->artist->name
+
+That way, when we’re displaying artworks, we can instantly show who made them without extra queries.”
+
+    “Also worth noting — if our foreign key wasn’t artist_id, we could customize it in the method call. But since it is artist_id, we don’t need to.”
+
+🖼️ Why This Model Matters
+
+    “This model is central to everything we do with artwork:
+    Whether it’s displaying it on /collection or /art-of-the-day, or even attaching it to a specific artist on the /artists page — it all happens through this file.
+    It’s the backbone for how our app understands what a piece of artwork is.”
+
+✅ Wrap-up
+
+    “So to sum up — this model defines what artwork means in our system: what fields it has, how we can fill them, and how it connects to artists. It keeps our code clean and helps Laravel handle a lot of the heavy lifting behind the scenes.”
+
+
+
+
+Artwork.php — Laravel Model Walkthrough
+🧾 Purpose of this File
+
+    This file defines the Artwork model, which represents the artworks table in our database. It acts as the bridge between our code and the database records for individual artworks.
+
+🧰 Key Feature: HasFactory
+
+    We’re using the HasFactory trait, which allows us to generate test data easily using Laravel factories — like we did in the database seeder to create 30 random artworks.
+
+🔒 Security via $fillable
+
+    The $fillable array defines which fields can be mass-assigned:
+
+    title
+
+    description
+
+    image_url
+
+    artist_id
+
+    This is important for security, so users or attackers can’t inject unwanted fields into our database.
+
+🧬 Relationship: Artwork belongs to an Artist
+
+public function artist(): BelongsTo
+{
+    return $this->belongsTo(Artist::class);
+}
+
+    Here, we define a belongsTo relationship between Artwork and Artist.
+    This tells Laravel that each artwork is created by one artist.
+
+    We use this relationship in the views like this:
+    $artwork->artist->name
+    to easily fetch the artist who made the artwork.
+
+📌 How It Connects to Other Parts
+
+    This model gets used in:
+
+    ArtworkController.php to fetch or store artwork
+
+    Blade views like collection.blade.php and art-of-the-day.blade.php
+
+    The Seeder to create test data
+
+    Database relationships with the artists table
+
+🧠 Why This Model is Important
+
+    This is the core of our app’s artwork logic. Without this model:
+
+    We can’t store or retrieve artwork
+
+    We can’t link it to artists
+
+    We lose all structure for what an artwork is
+
+✅ Wrap-up Talking Point
+
+    “So in short, this file defines what an artwork is in our system, how it relates to artists, and what data we allow to be stored. It’s a key model that gets used all throughout our backend.”
+
+
+
+
+
+
+
+User.php — Laravel Model Walkthrough
+🧾 Purpose of this File
+
+    This is our main User model, which interacts with the users table in the database.
+    It’s based on Laravel’s built-in Authenticatable class, so it supports login, authentication, and notifications out of the box.
+
+🧰 Traits Used
+
+use HasFactory, Notifiable;
+
+    HasFactory: Allows us to create dummy users using factories.
+
+    Notifiable: Enables built-in Laravel notification features (like password resets, emails).
+
+🔒 Security with $fillable
+
+protected $fillable = ['name', 'email', 'password', 'role'];
+
+    This defines which fields can be mass-assigned (used during registration or admin creation).
+    It includes role, so we can assign roles like 'admin', 'artist', or 'user'.
+
+🙈 Data Hiding with $hidden
+
+protected $hidden = ['password', 'remember_token'];
+
+    When a user is serialized (e.g., converted to JSON), we hide sensitive fields like the password and the remember token.
+
+🔄 Type Casting with casts()
+
+'email_verified_at' => 'datetime',
+'password' => 'hashed',
+
+    This tells Laravel:
+
+    Convert email_verified_at to a Carbon date object.
+
+    Automatically hash the password whenever it’s saved.
+
+👮 Role-Based Access Helpers
+
+public function isAdmin(): bool { return $this->role === 'admin'; }
+public function isArtist(): bool { return $this->role === 'artist'; }
+
+    These are helper methods we can use in our views or controllers to quickly check a user's role, e.g.:
+
+@if (auth()->user()->isAdmin())
+    <!-- Show admin dashboard -->
+@endif
+
+🧠 Why This Model is Important
+
+    Everything user-related — from login and registration to role permissions — starts here.
+    It powers the Seeder to create admin, artist, and default users and supports access control across the app.
+
+✅ Wrap-up Talking Point
+
+    “This is the backbone for user management. It controls what a user can do, keeps their data safe, and gives us easy ways to check roles and handle authentication securely.”
+
+
+
+
+
+
+
+

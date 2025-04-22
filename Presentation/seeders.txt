@@ -1,0 +1,42 @@
+Presentation – Seeder Walkthrough: DatabaseSeeder.php
+🧠 What is a Seeder? (Intro)
+
+    “This file is responsible for setting up fake but realistic data in our database — useful for testing and development. Instead of manually creating users or artists, this script does all that for us using Laravel factories.”
+
+👤 User Seeding (Admin, Artist, Regular Users)
+
+    “First, we’re creating a default admin user. This one has the email admin@example.com, and we’ve given them the role ‘admin’.
+    Then, we also create a sample artist user — again with a specific name and role.
+    After that, we use the factory to generate 5 normal users. These help us simulate a real audience on the site, so we can test what a regular user sees.”
+
+🎨 Creating Artists
+
+    “Next, we create 10 artists using the Artist factory. Each one is generated with random, fake data — like names or bios.
+    These artists form the base of our content, so we can link artworks to them later and test things like the /artists page or filtering by artist.”
+
+🖼️ Generating Artworks
+
+    “After the artists, we generate 30 pieces of artwork using the Artwork factory.
+    What’s cool here is that we use Laravel’s recycle() method — this makes sure the 30 artworks are assigned evenly across the 10 artists we created earlier.
+    So each artwork already belongs to a real artist in the database — which helps our views and routes work properly.”
+
+📦 Extra: Other Seeders (Optional for Later)
+
+    “There’s a section in the file where we can call other seeder files, like UserSeeder or ArtistSeeder. Right now it’s commented out, but this is helpful if we want to break this into multiple files and keep the code cleaner in future versions.”
+
+⚙️ How to Run It
+
+    “To actually run all of this, we just use:
+
+php artisan db:seed
+
+Or if we want to refresh the database and seed from scratch:
+
+php artisan migrate:fresh --seed
+
+This clears everything and gives us a clean database with all of this fake data set up.”
+✅ Wrap-up
+
+    “So this seeder sets up the entire structure of users, artists, and artworks for testing. It’s really helpful because we can load realistic content with just one command — and it supports all the major pages of the app.”
+
+
