@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileController; // Ensure ProfileController is imported
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ArtworkController;
@@ -12,19 +12,9 @@ use App\Http\Controllers\Admin\AdminArtworkController;
 use App\Http\Controllers\Admin\AdminArtistController;
 use App\Http\Controllers\Admin\UserController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+/* ... other routes ... */
 
 // --- Public Routes ---
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/collection', [ArtworkController::class, 'index'])->name('artworks.index');
@@ -33,13 +23,10 @@ Route::get('/art-of-the-day', [ArtworkController::class, 'artOfTheDay'])->name('
 Route::get('/artists', [ArtistController::class, 'index'])->name('artists.index');
 Route::get('/artists/{artist}', [ArtistController::class, 'show'])->name('artists.show');
 
-
 // --- Default Breeze Dashboard Route ---
 Route::get('/dashboard', function () {
-    // Use Auth facade here
-    if (Auth::check()) { // <-- Changed from auth()->check()
-        $user = Auth::user(); // <-- Changed from auth()->user()
-        // Check if isAdmin() and isArtist() methods exist on the User model
+    if (Auth::check()) {
+        $user = Auth::user();
         if (method_exists($user, 'isAdmin') && $user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         }
@@ -47,17 +34,24 @@ Route::get('/dashboard', function () {
              return redirect()->route('admin.dashboard');
         }
     }
-    // Default view for authenticated users without specific roles
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // --- Admin Routes ---
+// Keep admin-specific CRUD and dashboard routes here
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('artworks', AdminArtworkController::class);
     Route::resource('artists', AdminArtistController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class); // Consider adding ->middleware('is_admin');
+});
+
+// --- Profile Routes (Provided by Breeze) ---
+// Keep these outside the admin group so their names are not prefixed with 'admin.'
+// But still protect them with the 'auth' middleware.
+Route::middleware('auth')->group(function () {
+    // The URL will be '/profile' (not '/admin/profile' unless you add a prefix here)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
